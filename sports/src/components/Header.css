@@ -1,0 +1,35 @@
+.top {
+  text-align: center;
+  margin-top: 20px;
+  font-family: sans-serif;
+}
+
+.headerButton {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #fff;
+  transition: background-color 0.2s;
+
+  justify-content: center;
+  gap:15px;
+  margin-top: 10px
+}
+
+.button-container {
+  display: flex;           
+  justify-content: center;  
+  gap: 15px;               
+  margin-top: 10px;      
+}
+
+.create-button {
+  position: absolute;  
+  right: 20px;          
+  background-color: #f0f0f0;
+  padding: 10px 15px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+}
