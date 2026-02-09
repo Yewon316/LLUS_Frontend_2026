@@ -5,7 +5,7 @@ import "./SportsCard.css";
 export default function SportsList({ data }) {
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h2>Sports Groups</h2>
+      <h2>Current events</h2>
 
       <div className = "sportsGroup">
         {data.length === 0 ? (

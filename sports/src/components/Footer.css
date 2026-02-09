@@ -1,0 +1,60 @@
+.footer {
+  width: 100%;
+  padding-top: 20px;
+  background-color: #ffffff;
+  color: #666;
+  font-family: sans-serif;
+}
+
+.footer hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between; /* Pushes Logo to left, Links to right */
+  align-items: center;
+  padding: 0 40px 40px 40px; /* Space on sides and bottom */
+  max-width: 1200px;
+  margin: 0 auto; /* Centers the whole footer container */
+}
+
+.footer__logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.footer__copy {
+  font-size: 13px;
+  color: #999;
+  /* This will sit in the middle because of space-between */
+}
+
+.footer__links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer__links a {
+  text-decoration: none;
+  color: #2b6cb0; /* Matching your Purdue blue */
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+.footer__links a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+/* Mobile Responsive: Stack them on top of each other if the screen is small */
+@media (max-width: 768px) {
+  .footer__inner {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

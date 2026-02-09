@@ -1,4 +1,5 @@
 .top {
+    margin: 0;
   text-align: center;
   margin-top: 20px;
   font-family: sans-serif;
@@ -32,4 +33,42 @@
   border: 1px solid #999;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.header-wrapper {
+ position: relative;
+ padding-top: 20px;
+}
+
+.header-logo{
+  position: absolute;
+  top:10px;
+  left: 20px;
+  width: 80px;
+  height: auto
+}
+
+.sports-navbar{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    padding: 15px 0;
+    background-color: "lightyellow";
+}
+
+.sport-link{
+    background:none;
+    border:none;
+    font-size:14px;
+    font-weight:600;
+    color:#555;
+    cursor:pointer;
+    padding:5px 10px;
+    transition: color 0.2s;
+    text-transform: uppercase;
+    letter-spacing:0.5px;
+}
+.sport-link:hover {
+    color: #2b6cb0; 
+    text-decoration: underline;
 }
