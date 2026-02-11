@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const linkClass = ({ isActive }) =>
-    `nav__link ${isActive ? "nav__link--active" : ""}`;
+    `nav__link ${isActive ? "nav__link--active" : "nav__link"}`;
 
   return (
     <header className="nav">
