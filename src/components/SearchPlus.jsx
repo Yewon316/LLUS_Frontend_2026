@@ -43,6 +43,9 @@ export default function SearchSection({
         <button className="btn btn--primary" type="submit">
           검색
         </button>
+        <button className="btn plus_button" type="button">
+          +
+        </button>
       </form>
     </section>
   );

@@ -51,6 +51,36 @@ export const POPULAR_MEETINGS = [
     schedule: "주말 오후",
     members: "14명",
   },
+  {
+    id: "p6",
+    category: "스포츠",
+    title: "농구할사람",
+    desc: "농구",
+    tags: ["초보환영"],
+    mode: "오프라인",
+    schedule: "주말 오후",
+    members: "10명",
+  },
+  {
+    id: "p7",
+    category: "스포츠",
+    title: "클라이밍",
+    desc: "클라이밍",
+    tags: ["초보가능"],
+    mode: "오프라인",
+    schedule: "평일 오후",
+    members: "4명",
+  },
+  {
+    id: "p8",
+    category: "스포츠",
+    title: "축구",
+    desc: "축구할사람",
+    tags: ["아무나"],
+    mode: "오프라인",
+    schedule: "주말 오전",
+    members: "22명",
+  },
 ];
 
 export const RECENT_MEETINGS = [
