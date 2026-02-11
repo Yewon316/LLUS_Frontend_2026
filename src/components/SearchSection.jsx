@@ -12,7 +12,6 @@ export default function SearchSection({
     e.preventDefault();
     onSearch?.({ category, keyword });
   };
-
   return (
     <section className="hero">
       <h1 className="hero__title">어떤 모임을 찾고 있나요?</h1>

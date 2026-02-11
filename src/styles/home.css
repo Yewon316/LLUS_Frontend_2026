@@ -263,7 +263,6 @@ a { color: inherit; text-decoration: none; }
 
 .meetingCard:active {
   opacity: 0.6;
-  transform: scale(0.98);
 }
 
 /* keyboard accessibility */
