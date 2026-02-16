@@ -6,7 +6,7 @@ import RecentList from "../components/RecentList";
 import { POPULAR_MEETINGS, RECENT_MEETINGS } from "../data/meetings";
 
 export default function HomePage() {
-  const [category, setCategory] = useState("전체");
+  const [category, setCategory] = useState("All");
   const [keyword, setKeyword] = useState("");
 
   const popular = useMemo(() => POPULAR_MEETINGS, []);
@@ -34,7 +34,7 @@ export default function HomePage() {
         onSearch={handleSearch}
       />
       <PopularCarousel items={popular} />
-      <RecentList items={recentFiltered} title="지금 올라온 모임" />
+      <RecentList items={recentFiltered} title="Latest Meetup" />
     </>
   );
 }
