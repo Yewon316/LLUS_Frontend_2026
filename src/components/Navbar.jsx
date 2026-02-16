@@ -15,16 +15,16 @@ export default function Navbar() {
 
         <nav className="nav__center">
           <NavLink to="/study" className={linkClass}>
-            스터디
+            Study
           </NavLink>
           <NavLink to="/project" className={linkClass}>
-            프로젝트
+            Project
           </NavLink>
           <NavLink to="/sports" className={linkClass}>
-            스포츠
+            Sport
           </NavLink>
           <NavLink to="/hobby" className={linkClass}>
-            취미
+            Hobby
           </NavLink>
         </nav>
 

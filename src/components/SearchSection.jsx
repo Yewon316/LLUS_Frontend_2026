@@ -14,14 +14,14 @@ export default function SearchSection({
   };
   return (
     <section className="hero">
-      <h1 className="hero__title">어떤 모임을 찾고 있나요?</h1>
+      <h1 className="hero__title">Looking for a Meetup?</h1>
       <form className="search" onSubmit={handleSubmit}>
         <div className="search__selectWrap">
           <select
             className="search__select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            aria-label="카테고리 선택">
+            aria-label="Select category">
             {CATEGORIES.map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -36,11 +36,11 @@ export default function SearchSection({
             className="search__input"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="키워드로 바로 입력하세요"
+            placeholder="Type keyword here"
           />
         </div>
         <button className="btn btn--primary" type="submit">
-          검색
+          Search
         </button>
       </form>
     </section>

@@ -8,7 +8,7 @@ export default function PopularCarousel({ items }) {
     <section className="section">
       <div className="section__head">
         <div>
-          <h2 className="section__title">지금 인기 있는 모임</h2>
+          <h2 className="section__title">Trending</h2>
           <p className="section__sub">
             이번 주에 참여자가 많은 모임을 모았어요
           </p>

@@ -3,7 +3,7 @@ import React from "react";
 export default function RecentList({
   items,
   title,
-  rightActionLabel = "더보기",
+  rightActionLabel = "More",
 }) {
   return (
     <section className="section section--recent">

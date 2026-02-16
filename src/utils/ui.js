@@ -1,12 +1,12 @@
 export function categoryClass(category) {
   switch (category) {
-    case "스터디":
+    case "Study":
       return "badge badge-study";
-    case "프로젝트":
+    case "Project":
       return "badge badge-project";
-    case "스포츠":
+    case "Sports":
       return "badge badge-sports";
-    case "취미":
+    case "Hobby":
       return "badge badge-hobby";
     default:
       return "badge";
