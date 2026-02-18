@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchSection({
+export default function SectionPlus({
   category,
   setCategory,
   keyword,
