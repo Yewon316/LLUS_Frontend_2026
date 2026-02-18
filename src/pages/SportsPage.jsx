@@ -16,15 +16,7 @@ export default function SportsPage() {
     if (!q) return sportsMeetings;
 
     return sportsMeetings.filter((m) => {
-      const haystack = [
-        m.title,
-        m.desc,
-        m.category,
-        ...(m.tags ?? []),
-        m.mode,
-        m.schedule,
-        m.members,
-      ]
+      const haystack = [m.title, m.desc]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
