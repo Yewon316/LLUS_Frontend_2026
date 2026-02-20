@@ -1,5 +1,138 @@
 export const CATEGORIES = ["All", "Study", "Project", "Sports", "Hobby"];
+export const STUDY_MEETINGS = [
+  {
+    
+  id: "s1",
+  category: "Study",
+  title: "MA 265 Linear Algebra Study Group",
+  desc: "Review proofs, eigenvalues, and exam practice problems together.",
+  tags: ["Weekly Review", "Homework Help", "Exam Prep"],
+  mode: "In‑Person",
+  schedule: "Mon & Wed 7pm",
+  members: "5 members",
+},
 
+{
+  id: "s2",
+  category: "Study",
+  title: "CHM 255 Organic Chemistry I Crew",
+  desc: "Let's master mechanisms, spectroscopy, and reaction patterns.",
+  tags: ["Mechanisms", "Practice Problems", "Pre‑Exam Sessions"],
+  mode: "In‑Person",
+  schedule: "Fri 4pm",
+  members: "8 members",
+},
+
+{
+  id: "s3",
+  category: "Study",
+  title: "CS 180 Programming Study Session",
+  desc: "Work through labs, debugging, and object‑oriented concepts together.",
+  tags: ["Java", "Debugging", "Labs"],
+  mode: "Online",
+  schedule: "Sun 8pm",
+  members: "10 members",
+},
+
+{
+  id: "s4",
+  category: "Study",
+  title: "PHYS 172 Exam Prep Group",
+  desc: "Concept review, problem walkthroughs, and formula breakdowns.",
+  tags: ["Physics", "Problem Solving", "Exam Prep"],
+  mode: "In‑Person",
+  schedule: "Sat 2pm",
+  members: "6 members",
+},
+
+{
+  id: "s5",
+  category: "Study",
+  title: "CHM 116 General Chemistry II Study Team",
+  desc: "Thermo, equilibrium, kinetics — let's tackle them together.",
+  tags: ["Chemistry", "Weekly Sessions", "Homework Help"],
+  mode: "Online",
+  schedule: "Thu 6pm",
+  members: "9 members",
+},
+{
+  id: "s6",
+  category: "Study",
+  title: "PHYS 241 Electricity & Optics Study Group",
+  desc: "Work through E-field problems, Gauss’s Law, circuits, and optics exam prep.",
+  tags: ["Physics", "Problem Solving", "Exam Prep"],
+  mode: "In‑Person",
+  schedule: "Tue 6pm",
+  members: "7 members",
+},
+
+{
+  id: "s7",
+  category: "Study",
+  title: "ENGR 132 MATLAB & Design Lab Team",
+  desc: "Let's tackle MATLAB UDFs, plots, and design projects together.",
+  tags: ["MATLAB", "Labs", "Coding Help"],
+  mode: "Online",
+  schedule: "Thu 8pm",
+  members: "11 members",
+},
+
+{
+  id: "s8",
+  category: "Study",
+  title: "CHE 205 Material & Energy Balances Crew",
+  desc: "Solve mass balances, energy balances, and multi‑unit process problems.",
+  tags: ["Chemical Engineering", "Process Diagrams", "Homework Help"],
+  mode: "In‑Person",
+  schedule: "Sun 3pm",
+  members: "6 members",
+},
+
+{
+  id: "s9",
+  category: "Study",
+  title: "MA 261 Multivariate Calculus Study Circle",
+  desc: "Gradients, double integrals, Stokes’ theorem — let’s break them down.",
+  tags: ["Calculus", "Weekly Review", "Exam Prep"],
+  mode: "Online",
+  schedule: "Wed 9pm",
+  members: "9 members",
+},
+
+{
+  id: "s10",
+  category: "Study",
+  title: "CHM 261 Organic Chemistry II Group",
+  desc: "Aromaticity, carbonyl chemistry, and synthesis practice sessions.",
+  tags: ["Organic Chemistry", "Mechanisms", "Practice Problems"],
+  mode: "In‑Person",
+  schedule: "Sat 1pm",
+  members: "5 members",
+},
+
+{
+  id: "s11",
+  category: "Study",
+  title: "CS 240 Systems Programming Study Team",
+  desc: "Pointers, memory management, and C debugging sessions.",
+  tags: ["C Programming", "Debugging", "Labs"],
+  mode: "Online",
+  schedule: "Fri 7pm",
+  members: "8 members",
+},
+
+{
+  id: "s12",
+  category: "Study",
+  title: "ME 200 Thermodynamics I Study Group",
+  desc: "Work through cycles, entropy, and property tables together.",
+  tags: ["Thermo", "Engineering", "Exam Prep"],
+  mode: "In‑Person",
+  schedule: "Mon 5pm",
+  members: "6 members",
+}
+  
+]
 export const POPULAR_MEETINGS = [
   {
     id: "p1",
