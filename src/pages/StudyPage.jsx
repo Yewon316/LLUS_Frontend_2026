@@ -31,7 +31,9 @@ export default function StudyPage() {
       <div>
         <SearchPlus keyword={keyword} setKeyword={setKeyword} />
         <MeetingGrid meetings={filteredMeetings} columns={3} />
+        
       </div>
     </div>
   );
 }
+// 병일이 형거 고대로 가져왔습니다. //

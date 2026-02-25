@@ -335,3 +335,22 @@ a { color: inherit; text-decoration: none; }
   color: #333;
   text-decoration: underline;
 }
+
+.btn2{
+position: relative;
+left: 500px;
+
+padding: 8px 12px;
+background: gold;
+color: black;
+border-radius: 6px;
+  
+}
+.btn3{
+  position: relative;
+  left: 530px;
+  padding: 8px 12px;
+  background: gold ;
+  color: black;
+  border-radius: 6px;
+}

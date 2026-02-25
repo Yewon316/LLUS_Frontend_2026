@@ -20,7 +20,7 @@ export default function MeetingGrid({ meetings, columns = 3, onCardClick }) {
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && onCardClick?.(m)}>
           <h3 className="meetingTitle">{m.title}</h3>
-          {/* <p className="meetingDesc">{m.desc}</p> */}
+          {/* <p className="meetingDesc">{m.desc}</p> , desc는 카드에서 안보이게 */}  
 
           {m.tags?.length ? (
             <div className="tagRow">
@@ -43,3 +43,4 @@ export default function MeetingGrid({ meetings, columns = 3, onCardClick }) {
     </div>
   );
 }
+// 여기서 바꾼거는 link 태그로 추가//

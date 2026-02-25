@@ -9,7 +9,7 @@ export const STUDY_MEETINGS = [
   tags: ["Weekly Review", "Homework Help", "Exam Prep"],
   mode: "In‑Person",
   schedule: "Mon & Wed 7pm",
-  members: "5 members",
+  members: "5",
 },
 
 {
@@ -20,7 +20,7 @@ export const STUDY_MEETINGS = [
   tags: ["Mechanisms", "Practice Problems", "Pre‑Exam Sessions"],
   mode: "In‑Person",
   schedule: "Fri 4pm",
-  members: "8 members",
+  members: "8",
 },
 
 {
@@ -31,7 +31,7 @@ export const STUDY_MEETINGS = [
   tags: ["Java", "Debugging", "Labs"],
   mode: "Online",
   schedule: "Sun 8pm",
-  members: "10 members",
+  members: "10",
 },
 
 {
@@ -42,7 +42,7 @@ export const STUDY_MEETINGS = [
   tags: ["Physics", "Problem Solving", "Exam Prep"],
   mode: "In‑Person",
   schedule: "Sat 2pm",
-  members: "6 members",
+  members: "6",
 },
 
 {
@@ -53,7 +53,7 @@ export const STUDY_MEETINGS = [
   tags: ["Chemistry", "Weekly Sessions", "Homework Help"],
   mode: "Online",
   schedule: "Thu 6pm",
-  members: "9 members",
+  members: "9",
 },
 {
   id: "s6",
@@ -63,7 +63,7 @@ export const STUDY_MEETINGS = [
   tags: ["Physics", "Problem Solving", "Exam Prep"],
   mode: "In‑Person",
   schedule: "Tue 6pm",
-  members: "7 members",
+  members: "7",
 },
 
 {
@@ -74,7 +74,7 @@ export const STUDY_MEETINGS = [
   tags: ["MATLAB", "Labs", "Coding Help"],
   mode: "Online",
   schedule: "Thu 8pm",
-  members: "11 members",
+  members: "11",
 },
 
 {
@@ -85,7 +85,7 @@ export const STUDY_MEETINGS = [
   tags: ["Chemical Engineering", "Process Diagrams", "Homework Help"],
   mode: "In‑Person",
   schedule: "Sun 3pm",
-  members: "6 members",
+  members: "6",
 },
 
 {
@@ -96,7 +96,7 @@ export const STUDY_MEETINGS = [
   tags: ["Calculus", "Weekly Review", "Exam Prep"],
   mode: "Online",
   schedule: "Wed 9pm",
-  members: "9 members",
+  members: "9",
 },
 
 {
@@ -107,7 +107,7 @@ export const STUDY_MEETINGS = [
   tags: ["Organic Chemistry", "Mechanisms", "Practice Problems"],
   mode: "In‑Person",
   schedule: "Sat 1pm",
-  members: "5 members",
+  members: "5",
 },
 
 {
@@ -118,7 +118,7 @@ export const STUDY_MEETINGS = [
   tags: ["C Programming", "Debugging", "Labs"],
   mode: "Online",
   schedule: "Fri 7pm",
-  members: "8 members",
+  members: "8",
 },
 
 {
@@ -129,7 +129,7 @@ export const STUDY_MEETINGS = [
   tags: ["Thermo", "Engineering", "Exam Prep"],
   mode: "In‑Person",
   schedule: "Mon 5pm",
-  members: "6 members",
+  members: "6",
 }
   
 ]
