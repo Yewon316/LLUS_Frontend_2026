@@ -6,6 +6,7 @@ import StudyPage from "./pages/StudyPage";
 import ProjectPage from "./pages/ProjectPage";
 import SportsPage from "./pages/SportsPage";
 import HobbyPage from "./pages/HobbyPage";
+import DetailPage from "./pages/DetailPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/project" element={<ProjectPage />} />
         <Route path="/sports" element={<SportsPage />} />
         <Route path="/hobby" element={<HobbyPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
       </Route>
     </Routes>
   );

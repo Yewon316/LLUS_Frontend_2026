@@ -1,0 +1,53 @@
+.detail {
+    position: relative;
+    padding: 2rem;
+  }
+  
+  .detail__back {
+    margin-bottom: 1rem;
+  }
+  
+  .detail__members {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .detail__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .detail__tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .detail__tag {
+    background: #eee;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .detail__meta {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  .detail__desc {
+    margin-bottom: 3rem;
+  }
+  
+  .detail__join {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
