@@ -216,5 +216,5 @@ export const HOBBY_MEETINGS = [
     mode: "Online",
     schedule: "Bi-weekly",
     members: "5 members",
-  },  
-]
+  },
+];

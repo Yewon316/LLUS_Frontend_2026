@@ -27,9 +27,6 @@ export default function SectionPlus({
         <button className="btn btn--primary" type="submit">
           Search
         </button>
-        <button className="btn plus_button" type="button">
-          +
-        </button>
       </form>
     </section>
   );
