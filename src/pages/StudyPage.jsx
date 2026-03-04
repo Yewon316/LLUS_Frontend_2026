@@ -1,22 +1,16 @@
 import { useMemo, useState } from "react";
 import SearchPlus from "../components/SearchPlus";
-import { STUDY_MEETINGS } from "../data/meetings";
 import MeetingGrid from "../components/MeetingGrid";
+import { Link } from "react-router-dom";
 
-
-export default function StudyPage() {
+export default function StudyPage({ meetings, onDelete }) {
   const [keyword, setKeyword] = useState("");
-
-  const studyMeetings = useMemo(
-    () => STUDY_MEETINGS.filter((m) => m.category === "Study"),
-    [],
-  );
 
   const filteredMeetings = useMemo(() => {
     const q = keyword.trim().toLowerCase();
-    if (!q) return studyMeetings;
+    if (!q) return meetings;
 
-    return STUDY_MEETINGS.filter((m) => {
+    return meetings.filter((m) => {
       const haystack = [m.title, m.desc]
         .filter(Boolean)
         .join(" ")
@@ -24,16 +18,23 @@ export default function StudyPage() {
 
       return haystack.includes(q);
     });
-  }, [keyword, studyMeetings]);
+  }, [keyword, meetings]);
 
   return (
     <div className="section">
       <div>
+        <Link to="/create">
+          <button className="createBtn">Create</button>
+        </Link>
+
         <SearchPlus keyword={keyword} setKeyword={setKeyword} />
-        <MeetingGrid meetings={filteredMeetings} columns={3} />
-        
+
+        <MeetingGrid
+          meetings={filteredMeetings}
+          columns={3}
+          onDelete={onDelete}
+        />
       </div>
     </div>
   );
 }
-// 병일이 형거 고대로 가져왔습니다. //
