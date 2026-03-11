@@ -9,8 +9,8 @@ import DetailStudy from "./pages/DetailStudy";
 import ProjectPage from "./pages/ProjectPage";
 import SportsPage from "./pages/SportsPage";
 import HobbyPage from "./pages/HobbyPage";
-import { STUDY_MEETINGS } from "./data/meetings"; 
-import CreatePage from "./pages/CreatePage"; 
+import MeetingCreatePage from "./pages/MeetingCreatePage";
+import MeetingDetailPage from "./pages/MeetingDetailPage";
 
 export default function App() {
 
@@ -31,6 +31,8 @@ const handleDelete = (id) => {
         <Route path="/project" element={<ProjectPage />} />
         <Route path="/sports" element={<SportsPage />} />
         <Route path="/hobby" element={<HobbyPage />} />
+        <Route path="/meetings/:id" element={<MeetingDetailPage />} />
+        <Route path="/meetings/new" element={<MeetingCreatePage />} />
       </Route>
     </Routes>
   );
