@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function MeetingGrid({ meetings, columns = 3, onCardClick, onDelete }) {
+export default function MeetingGrid({ meetings, columns = 3, onCardClick }) {
   const navigate = useNavigate();
 
   const goDetail = (m) => {
@@ -36,10 +36,6 @@ export default function MeetingGrid({ meetings, columns = 3, onCardClick, onDele
               {[m.mode, m.schedule, m.members].filter(Boolean).join(" · ")}
             </div>
           )}
-          <button className="deleteBtn" onClick={(e) => {
-              e.stopPropagation();
-              onDelete(m.id);
-            }}>Delete</button>
         </div>
       ))}
     </div>

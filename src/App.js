@@ -6,8 +6,8 @@ import StudyPage from "./pages/StudyPage";
 import ProjectPage from "./pages/ProjectPage";
 import SportsPage from "./pages/SportsPage";
 import HobbyPage from "./pages/HobbyPage";
+import MeetingCreatePage from "./pages/MeetingCreatePage";
 import MeetingDetailPage from "./pages/MeetingDetailPage";
-
 
 export default function App() {
   return (
@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/sports" element={<SportsPage />} />
         <Route path="/hobby" element={<HobbyPage />} />
         <Route path="/meetings/:id" element={<MeetingDetailPage />} />
+        <Route path="/meetings/new" element={<MeetingCreatePage />} />
       </Route>
     </Routes>
   );

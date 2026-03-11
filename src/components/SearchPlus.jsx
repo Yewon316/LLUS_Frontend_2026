@@ -6,6 +6,7 @@ export default function SectionPlus({
   keyword,
   setKeyword,
   onSearch,
+  onPlus,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,8 +25,11 @@ export default function SectionPlus({
             placeholder="Type keyword here"
           />
         </div>
-        <button className="btn btn--primary" type="submit">
+        <button className="btn--search" type="submit">
           Search
+        </button>
+        <button className="btn--plus" type="button" onClick={onPlus}>
+          +
         </button>
       </form>
     </section>
