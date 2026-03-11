@@ -10,6 +10,7 @@ export default function MeetingDetailPage() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -139,6 +140,21 @@ export default function MeetingDetailPage() {
       </div>
 
       {err ? <p style={{ color: "crimson", marginTop: 12 }}>{err}</p> : null}
+      <div style={{ marginTop: 20 }}>
+        <button
+          className="btn"
+          onClick={() => setJoined(!joined)}
+          style={{
+            background: joined ? "#fff3f3" : "#f0fdf4",
+            border: joined ? "1px solid #ffd1d1" : "1px solid #bbf7d0",
+            color: joined ? "#b20000" : "#166534",
+            fontWeight: 700,
+            padding: "10px 24px",
+          }}>
+          {joined ? "Leave" : "Join"}
+        </button>
+        {joined && <p style={{ color: "#166534", marginTop: 8 }}>Joined!</p>}
+      </div>
     </div>
   );
 }
