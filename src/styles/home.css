@@ -567,4 +567,19 @@ a { color: inherit; text-decoration: none; }
   .meetingCreate__grid {
     grid-template-columns: 1fr;
   }
+  .nav__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auth-link {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
 }
