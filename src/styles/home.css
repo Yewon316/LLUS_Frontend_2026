@@ -568,3 +568,8 @@ a { color: inherit; text-decoration: none; }
     grid-template-columns: 1fr;
   }
 }
+
+.nav_logo{
+  width: 200px;
+  height: auto;
+}

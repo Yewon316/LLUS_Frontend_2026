@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import logo from './image/moim_logo.png';
+import '../styles/home.css';
+
 
 export default function Navbar() {
   const linkClass = ({ isActive }) =>
@@ -8,8 +11,8 @@ export default function Navbar() {
     <header className="nav">
       <div className="nav__inner">
         <div className="nav__left">
-          <NavLink to="/" className={linkClass}>
-            Logo
+           <NavLink to="/" className={linkClass}>
+            <img src={logo} alt="Moim Logo" className="nav_logo" />  
           </NavLink>
         </div>
 
