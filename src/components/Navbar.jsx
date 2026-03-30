@@ -1,11 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import logo from './image/moim_logo.png';
 import '../styles/home.css';
 
-
 export default function Navbar() {
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
   const linkClass = ({ isActive }) =>
     `nav__link ${isActive ? "nav__link--active" : "nav__link"}`;
+
+  const displayName =
+    user?.user_metadata?.username || user?.email?.split("@")[0] || "Profile";
 
   return (
     <header className="nav">
@@ -32,7 +38,21 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__right">
-          <button className="btn btn--ghost">Login</button>
+          {!loading && user ? (
+            <button
+              className="btn btn--ghost"
+              onClick={() => navigate("/profile")}>
+              {displayName}
+            </button>
+          ) : (
+            <>
+              <button
+                className="btn btn--ghost"
+                onClick={() => navigate("/login")}>
+                Login
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>
