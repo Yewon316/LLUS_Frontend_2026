@@ -43,7 +43,6 @@ export default function HobbyPage() {
     "Creative",
   ];
 
-<<<<<<< Updated upstream
   const outdoorTags = ["Outdoor", "Hiking"];
 
   const socialTags = [
@@ -56,35 +55,6 @@ export default function HobbyPage() {
     "Yoga",
     "Health",
   ];
-=======
-      if (error) {
-        console.error(error);
-        return;
-      }
-      setMeetings(data ?? []);
-    })();
-  }, []);
-
-  // ★ elly의 필터 로직 그대로 유지
-  const hobbyMeetings = useMemo(() => {
-    const search = keyword.trim().toLowerCase();
-    return meetings
-      .filter((item) => {
-        if (activeFilter === "All") return true;
-        if (activeFilter === "Creative")
-          return item.tags?.some((t) => CREATIVE_TAGS.includes(t));
-        if (activeFilter === "Outdoor")
-          return item.tags?.some((t) => OUTDOOR_TAGS.includes(t));
-        if (activeFilter === "Social")
-          return item.tags?.some((t) => SOCIAL_TAGS.includes(t));
-        return true;
-      })
-      .filter((item) => {
-        if (!search) return true;
-        return item.title?.toLowerCase().includes(search);
-      });
-  }, [meetings, activeFilter, keyword]);
->>>>>>> Stashed changes
 
   const search = keyword.trim().toLowerCase(); // 검색어를 미리 정리
   // trim() → 앞뒤 공백 제거

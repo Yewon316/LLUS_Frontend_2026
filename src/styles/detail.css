@@ -1,0 +1,221 @@
+.detail {
+    position: relative;
+    padding: 2rem;
+  }
+  
+  .detail__back {
+    margin-bottom: 1rem;
+  }
+  
+  .detail__members {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .detail__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .detail__tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .detail__tag {
+    background: #eee;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .detail__meta {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  .detail__desc {
+    margin-bottom: 3rem;
+  }
+  
+  .detail__join {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+
+.profile {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+.profile__nickname {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.profile__email {
+  margin: 0 0 4px 0;
+  color: #555;
+}
+
+.profile__info {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 8px;
+}
+
+.profile__info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile__info-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.profile__info-edit {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+}
+
+.profile__info-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile__info-label {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.profile__info-value {
+  margin: 0;
+  color: #333;
+}
+
+.profile__info-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.profile__actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.profile__btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile__btn--save {
+  background: #007bff;
+  color: white;
+}
+
+.profile__btn--cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.profile__logout {
+  margin-top: 12px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #888;
+}
+
+.profile__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.profile__tab {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.profile__tab--active {
+  background: #333;
+  color: #fff;
+  font-weight: bold;
+}
+
+.profile__content {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 8px 20px;
+}
+
+.profile__empty {
+  color: #aaa;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.profile__item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__item-title {
+  margin: 0;
+  font-weight: bold;
+}
+
+.profile__item-category {
+  margin: 0;
+  font-size: 13px;
+  color: #888;
+}
+
+.profile__item-date {
+  margin: 0;
+  font-size: 13px;
+  color: #aaa;
+}
