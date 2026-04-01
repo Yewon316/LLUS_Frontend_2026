@@ -1,13 +1,15 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { categoryClass } from "../utils/ui";
+import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function PopularCarousel({ items }) {
   const scrollerRef = useRef(null);
   const navigate = useNavigate();
+  const revealRef = useScrollReveal();
 
   return (
-    <section className="section">
+    <section className="section reveal" ref={revealRef}>
       <div className="section__head">
         <div>
           <h2 className="section__title">Trending</h2>

@@ -4,6 +4,7 @@ import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
 import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
+import useScrollReveal from "../hooks/useScrollReveal";
 import "../styles/home.css";
 
 export default function HobbyPage() {
@@ -13,6 +14,7 @@ export default function HobbyPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+  const revealRef = useScrollReveal();
 
   useEffect(() => {
     (async () => {
@@ -78,7 +80,9 @@ export default function HobbyPage() {
             {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
           </div>
         ) : (
-          <MeetingGrid meetings={hobbyMeetings} columns={3} />
+          <div className="reveal" ref={revealRef}>
+            <MeetingGrid meetings={hobbyMeetings} columns={3} />
+          </div>
         )}
       </div>
     </div>

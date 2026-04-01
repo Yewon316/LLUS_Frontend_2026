@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function RecentList({
   items,
@@ -7,9 +8,10 @@ export default function RecentList({
   rightActionLabel = "More",
 }) {
   const navigate = useNavigate();
+  const revealRef = useScrollReveal();
 
   return (
-    <section className="section section--recent">
+    <section className="section section--recent reveal" ref={revealRef}>
       <div className="section__head section__head--row">
         <h2 className="section__title">{title}</h2>
         <button className="linkBtn">{rightActionLabel}</button>
