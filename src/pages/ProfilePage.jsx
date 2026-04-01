@@ -84,6 +84,7 @@ const tabData = [createdMeetings, joinedMeetings];
     setCreatedMeetings((prev) => prev.filter((meeting) => meeting.id !== id));
   };
 
+
   return (
     <div className="section profile">
   
@@ -210,6 +211,7 @@ const tabData = [createdMeetings, joinedMeetings];
             onClick={() => handleDelete(item.id)}>
             Delete
           </button>
+          
         )}
       </div>
     ))
