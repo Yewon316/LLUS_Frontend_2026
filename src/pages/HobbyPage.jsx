@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
+import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/home.css";
 
@@ -9,10 +10,10 @@ export default function HobbyPage() {
   const [keyword, setKeyword] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ★ Supabase에서 Hobby 데이터 fetch (Aaron 패턴)
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase
@@ -23,9 +24,11 @@ export default function HobbyPage() {
 
       if (error) {
         console.error(error);
+        setLoading(false);
         return;
       }
       setMeetings(data ?? []);
+      setLoading(false);
     })();
   }, []);
 
@@ -70,7 +73,13 @@ export default function HobbyPage() {
             </button>
           ))}
         </div>
-        <MeetingGrid meetings={hobbyMeetings} columns={3} />
+        {loading ? (
+          <div className="meetingGrid" style={{ "--cols": 3 }}>
+            {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : (
+          <MeetingGrid meetings={hobbyMeetings} columns={3} />
+        )}
       </div>
     </div>
   );

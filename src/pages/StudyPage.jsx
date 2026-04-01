@@ -43,16 +43,17 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
+import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
-import { STUDY_MEETINGS } from "../data/meetings";
 
 export default function StudyPage() {
   const [keyword, setKeyword] = useState("");
   const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
-    useEffect(() => {
+  useEffect(() => {
     (async () => {
       const { data, error } = await supabase
         .from("meetings")
@@ -60,18 +61,14 @@ export default function StudyPage() {
         .eq("category", "Study")
         .order("created_at", { ascending: false });
 
-      console.log("study data:", data);
-      console.log("study error:", error);
-
       if (error) {
         console.error(error);
+        setLoading(false);
         return;
       }
       setMeetings(data ?? []);
+      setLoading(false);
     })();
-
-  
-
   }, []);
   const filteredMeetings = useMemo(() => {
     const q = keyword.trim().toLowerCase();
@@ -105,7 +102,13 @@ return (
             </button>
           ))}
         </div>*/}
-        <MeetingGrid meetings={filteredMeetings} columns={3} />
+        {loading ? (
+          <div className="meetingGrid" style={{ "--cols": 3 }}>
+            {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : (
+          <MeetingGrid meetings={filteredMeetings} columns={3} />
+        )}
       </div>
     </div>
   );
