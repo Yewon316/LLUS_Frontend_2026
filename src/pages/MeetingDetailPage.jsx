@@ -138,7 +138,6 @@ export default function MeetingDetailPage() {
             <div className="detail__footer">
               <div className="detail__actions">
                 <button className="detail__joinBtn">Join this Meeting</button>
-                <button className="detail__backBtn" onClick={goBack}>Back</button>
               </div>
             </div>
           </div>
