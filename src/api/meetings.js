@@ -1,7 +1,9 @@
 // src/api/meetings.js
-import { getSupabaseClient } from "../supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 const TABLE = "meetings";
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 function normalizeTags(tags) {
   if (Array.isArray(tags)) return tags.filter(Boolean).map(String);
@@ -56,8 +58,6 @@ export function normalizeMeetingRow(row) {
  * If your table grows, add pagination (range()) later.
  */
 export async function fetchMeetings({ limit = 100 } = {}) {
-  const supabase = getSupabaseClient();
-
   // Basic "select all rows"
   const { data, error } = await supabase
     .from(TABLE)
@@ -68,4 +68,21 @@ export async function fetchMeetings({ limit = 100 } = {}) {
   if (error) throw error;
 
   return (data ?? []).map(normalizeMeetingRow).filter((m) => m.id);
+}
+
+export async function fetchMeetingById(id) {
+  const normalizedId = String(id ?? "").trim();
+
+  // Demo cards still use ids like "p1" or "h2", so only query Supabase for UUID ids.
+  if (!normalizedId || !UUID_RE.test(normalizedId)) return null;
+
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select("*")
+    .eq("id", normalizedId)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return data ? normalizeMeetingRow(data) : null;
 }

@@ -4,6 +4,29 @@ import MeetingGrid from "../components/MeetingGrid";
 import "../styles/home.css";
 import { useState } from "react";
 
+const CREATIVE_TAGS = [
+  "Photography",
+  "Music",
+  "Guitar",
+  "Art",
+  "Drawing",
+  "Movie",
+  "Discussion",
+  "Writing",
+  "Creative",
+];
+const OUTDOOR_TAGS = ["Outdoor", "Hiking"];
+const SOCIAL_TAGS = [
+  "Social",
+  "Board Game",
+  "Reading",
+  "Books",
+  "Baking",
+  "Cooking",
+  "Yoga",
+  "Health",
+];
+
 export default function HobbyPage() {
   const [keyword, setKeyword] = useState(""); //검색어 상태 (SearchPlus에서 입력받음)
   const [activeFilter, setActiveFilter] = useState("All"); // 현재 선택된 필터 버튼 상태
@@ -20,6 +43,7 @@ export default function HobbyPage() {
     "Creative",
   ];
 
+<<<<<<< Updated upstream
   const outdoorTags = ["Outdoor", "Hiking"];
 
   const socialTags = [
@@ -32,6 +56,35 @@ export default function HobbyPage() {
     "Yoga",
     "Health",
   ];
+=======
+      if (error) {
+        console.error(error);
+        return;
+      }
+      setMeetings(data ?? []);
+    })();
+  }, []);
+
+  // ★ elly의 필터 로직 그대로 유지
+  const hobbyMeetings = useMemo(() => {
+    const search = keyword.trim().toLowerCase();
+    return meetings
+      .filter((item) => {
+        if (activeFilter === "All") return true;
+        if (activeFilter === "Creative")
+          return item.tags?.some((t) => CREATIVE_TAGS.includes(t));
+        if (activeFilter === "Outdoor")
+          return item.tags?.some((t) => OUTDOOR_TAGS.includes(t));
+        if (activeFilter === "Social")
+          return item.tags?.some((t) => SOCIAL_TAGS.includes(t));
+        return true;
+      })
+      .filter((item) => {
+        if (!search) return true;
+        return item.title?.toLowerCase().includes(search);
+      });
+  }, [meetings, activeFilter, keyword]);
+>>>>>>> Stashed changes
 
   const search = keyword.trim().toLowerCase(); // 검색어를 미리 정리
   // trim() → 앞뒤 공백 제거

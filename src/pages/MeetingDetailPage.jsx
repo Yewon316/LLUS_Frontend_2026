@@ -1,11 +1,32 @@
+<<<<<<< Updated upstream
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+=======
+import React, { useEffect, useMemo, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  POPULAR_MEETINGS,
+  RECENT_MEETINGS,
+  HOBBY_MEETINGS,
+} from "../data/meetings";
+import { fetchMeetingById } from "../api/meetings";
+
+const ALL_MEETINGS = [
+  ...POPULAR_MEETINGS,
+  ...RECENT_MEETINGS,
+  ...HOBBY_MEETINGS,
+];
+>>>>>>> Stashed changes
 
 export default function MeetingDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [dbMeeting, setDbMeeting] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState("");
 
+<<<<<<< Updated upstream
   const [meeting, setMeeting] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
@@ -78,6 +99,57 @@ export default function MeetingDetailPage() {
       <div className="section">
         <p>Loading...</p>
       </div>
+=======
+  const fallbackMeeting = useMemo(() => {
+    return ALL_MEETINGS.find((m) => String(m.id) === String(id));
+  }, [id]);
+
+  useEffect(() => {
+    let alive = true;
+
+    if (fallbackMeeting) {
+      setDbMeeting(null);
+      setErr("");
+      setLoading(false);
+      return () => {
+        alive = false;
+      };
+    }
+
+    (async () => {
+      setLoading(true);
+      setErr("");
+
+      try {
+        const meeting = await fetchMeetingById(id);
+        if (!alive) return;
+        setDbMeeting(meeting);
+      } catch (e) {
+        if (!alive) return;
+        console.error(e);
+        setErr(e.message ?? "Failed to load meeting.");
+        setDbMeeting(null);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, [fallbackMeeting, id]);
+
+  const meeting = dbMeeting ?? fallbackMeeting;
+
+  if (loading && !meeting) {
+    return (
+      <section style={{ padding: 24 }}>
+        <button className="btn" onClick={() => navigate(-1)}>
+          ← Back
+        </button>
+        <h1 style={{ marginTop: 12 }}>Loading meeting...</h1>
+      </section>
+>>>>>>> Stashed changes
     );
   }
 
@@ -87,9 +159,18 @@ export default function MeetingDetailPage() {
         <button className="btn" onClick={() => navigate(-1)}>
           ← Back
         </button>
+<<<<<<< Updated upstream
         <h1>Meeting not found</h1>
         <p>No meeting matches id: {id}</p>
       </div>
+=======
+        <h1 style={{ marginTop: 12 }}>Meeting not found</h1>
+        <p style={{ opacity: 0.8 }}>
+          No meeting matches id: <code>{id}</code>
+        </p>
+        {err ? <p style={{ opacity: 0.8 }}>Supabase error: {err}</p> : null}
+      </section>
+>>>>>>> Stashed changes
     );
   }
 

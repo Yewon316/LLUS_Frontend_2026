@@ -48,11 +48,7 @@ export default function MeetingCreatePage() {
         members: members.trim(),
       };
 
-      const { data, error } = await supabase
-        .from("meetings")
-        .insert(payload)
-        .select("*")
-        .single();
+      const { error } = await supabase.from("meetings").insert(payload);
 
       if (error) throw error;
 
