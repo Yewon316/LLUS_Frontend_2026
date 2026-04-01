@@ -2,13 +2,17 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
+import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
+import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function SportsPage() {
   const [keyword, setKeyword] = useState("");
   const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+  const revealRef = useScrollReveal();
 
   useEffect(() => {
     (async () => {
@@ -18,14 +22,13 @@ export default function SportsPage() {
         .eq("category", "Sports")
         .order("created_at", { ascending: false });
 
-      console.log("sports data:", data);
-      console.log("sports error:", error);
-
       if (error) {
         console.error(error);
+        setLoading(false);
         return;
       }
       setMeetings(data ?? []);
+      setLoading(false);
     })();
   }, []);
 
@@ -55,7 +58,15 @@ export default function SportsPage() {
           setKeyword={setKeyword}
           onPlus={handlePlus}
         />
-        <MeetingGrid meetings={filteredMeetings} columns={3} />
+        {loading ? (
+          <div className="meetingGrid" style={{ "--cols": 3 }}>
+            {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : (
+          <div className="reveal" ref={revealRef}>
+            <MeetingGrid meetings={filteredMeetings} columns={3} />
+          </div>
+        )}
       </div>
     </div>
   );

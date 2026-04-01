@@ -83,7 +83,7 @@ export default function LoginPage() {
 
           <div style={{ marginTop: "16px", textAlign: "center" }}>
             Don&apos;t have an account?{" "}
-            <Link to="/signup" style={{ color: "#4f46e5", fontWeight: "600" }}>
+            <Link to="/signup" style={{ color: "var(--accent)", fontWeight: "600" }}>
               Sign Up
             </Link>
           </div>
