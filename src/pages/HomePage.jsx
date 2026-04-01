@@ -9,20 +9,22 @@ export default function HomePage() {
   const [category, setCategory] = useState("All");
   const [keyword, setKeyword] = useState("");
 
-  const popular = useMemo(() => POPULAR_MEETINGS, []);
+  const popular = useMemo(() => {
+    if (category === "All") return POPULAR_MEETINGS;
+    return POPULAR_MEETINGS.filter((m) => m.category === category);
+  }, [category]);
 
   const recentFiltered = useMemo(() => {
-    const kw = keyword.trim().toLowerCase();
-    if (!kw) return RECENT_MEETINGS;
-    return RECENT_MEETINGS.filter(
-      (m) =>
-        m.title.toLowerCase().includes(kw) || m.desc.toLowerCase().includes(kw),
-    );
-  }, [keyword]);
+    return RECENT_MEETINGS
+      .filter((m) => category === "All" || m.category === category)
+      .filter((m) => {
+        const kw = keyword.trim().toLowerCase();
+        if (!kw) return true;
+        return m.title.toLowerCase().includes(kw) || m.desc.toLowerCase().includes(kw);
+      });
+  }, [keyword, category]);
 
-  const handleSearch = ({ category, keyword }) => {
-    console.log("search:", { category, keyword });
-  };
+  const handleSearch = () => {};
 
   return (
     <>

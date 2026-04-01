@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RecentList({
   items,
   title,
   rightActionLabel = "More",
 }) {
+  const navigate = useNavigate();
+
   return (
     <section className="section section--recent">
       <div className="section__head section__head--row">
@@ -14,7 +17,15 @@ export default function RecentList({
 
       <div className="list">
         {items.map((m) => (
-          <article key={m.id} className="card card--row">
+          <article
+            key={m.id}
+            className="card card--row"
+            onClick={() => navigate(`/meetings/${m.id}`)}
+            style={{ cursor: "pointer" }}
+            role="link"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && navigate(`/meetings/${m.id}`)}
+          >
             <div>
               <h3 className="card__title">{m.title}</h3>
               <p className="card__desc">{m.desc}</p>

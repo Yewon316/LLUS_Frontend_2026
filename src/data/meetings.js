@@ -219,31 +219,37 @@ export const POPULAR_MEETINGS = [
 export const RECENT_MEETINGS = [
   {
     id: "r1",
+    category: "Project",
     title: "Recruiting Teammates for a Frontend Portfolio Project",
     desc: "Build a real service-style output using React.",
   },
   {
     id: "r2",
+    category: "Study",
     title: "Weeknight Evening English Conversation Meetup",
     desc: "Light speaking practice based on everyday topics.",
   },
   {
     id: "r3",
+    category: "Study",
     title: "Backend Basics Study Group",
     desc: "Starting from API structure and DB integration.",
   },
   {
     id: "r4",
+    category: "Study",
     title: "Looking for People to Prep Coding Interviews Together",
     desc: "Let's prepare for coding tests together.",
   },
   {
     id: "r5",
+    category: "Hobby",
     title: "Learn English Listening by Watching Movies",
     desc: "Watch movies together and study English.",
   },
   {
     id: "r6",
+    category: "Project",
     title: "Building a Campus Life Management App",
     desc: "Implementing an app centered on schedule, assignments, and memo features.",
   },
