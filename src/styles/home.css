@@ -546,6 +546,12 @@ a { color: inherit; text-decoration: none; }
   transition: filter 0.2s ease;
 }
 .detail__joinBtn:hover { filter: brightness(0.92); }
+.detail__joinBtn:disabled { opacity: 0.6; cursor: not-allowed; filter: none; }
+.detail__joinBtn--leave {
+  background: #E55555;
+  border-color: #E55555;
+}
+.detail__joinBtn--leave:hover { filter: brightness(0.9); }
 
 .detail__backBtn {
   height: 46px;
