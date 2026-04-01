@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import "../styles/home.css";
 
 export default function MeetingCreatePage() {
   const [params] = useSearchParams();

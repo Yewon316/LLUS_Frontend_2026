@@ -117,6 +117,7 @@
   color: #333;
 }
 
+<<<<<<< HEAD
 .profile__info-input {
   width: 100%;
   padding: 8px;
@@ -149,6 +150,8 @@
   color: white;
 }
 
+=======
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
 .profile__logout {
   margin-top: 12px;
   background: none;

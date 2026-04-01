@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
+=======
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
 import "../styles/detail.css";
 
 const TABS = ["Created", "Joined"];
@@ -10,6 +16,7 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const { user, signOut, loading } = useAuth();
   const [activeTab, setActiveTab] = useState(0);
+<<<<<<< HEAD
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -32,6 +39,8 @@ export default function ProfilePage() {
       });
     }
   }, [user]);
+=======
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
 
   const tabData = [[], []];
 
@@ -109,6 +118,7 @@ export default function ProfilePage() {
 
   return (
     <div className="section profile">
+<<<<<<< HEAD
       <div style={{ marginBottom: "32px" }}>
         <h1 className="profile__nickname">{nickname}</h1>
         <p className="profile__email">{user.email}</p>
@@ -200,6 +210,43 @@ export default function ProfilePage() {
                 <p className="profile__info-value">{formData.bio || "Not set"}</p>
               )}
             </div>
+=======
+  
+      <div style={{ marginBottom: "32px" }}>
+        <h1 className="profile__nickname">{nickname}</h1>
+        <p className="profile__email">{user.email}</p>
+  
+        <div className="profile__info">
+        <div className="profile__info-header">
+          <h2 className="profile__info-title">Basic Info</h2>
+          <button className="profile__info-edit">Edit</button>
+        </div>
+
+        <div className="profile__info-fields">
+          <div>
+            <p className="profile__info-label">Name</p>
+            <p className="profile__info-value"></p>
+          </div>
+          <div>
+            <p className="profile__info-label">Gender</p>
+            <p className="profile__info-value"></p>
+          </div>
+          <div>
+            <p className="profile__info-label">School</p>
+            <p className="profile__info-value"></p>
+          </div>
+          <div>
+            <p className="profile__info-label">Major</p>
+            <p className="profile__info-value"></p>
+          </div>
+          <div>
+            <p className="profile__info-label">Phone</p>
+            <p className="profile__info-value"></p>
+          </div>
+          <div>
+            <p className="profile__info-label">Bio</p>
+            <p className="profile__info-value"></p>
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
           </div>
           {isEditing && (
             <div className="profile__actions">
@@ -209,7 +256,12 @@ export default function ProfilePage() {
           )}
         </div>
       </div>
+<<<<<<< HEAD
 
+=======
+      </div>
+  
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
       <div className="profile__tabs">
         {TABS.map((tab, i) => (
           <button
@@ -220,7 +272,11 @@ export default function ProfilePage() {
           </button>
         ))}
       </div>
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
       <div className="profile__content">
         {tabData[activeTab].length === 0 ? (
           <p className="profile__empty">No meetings found.</p>
@@ -240,8 +296,13 @@ export default function ProfilePage() {
         )}
       </div>
       <button className="profile__logout" onClick={handleLogout}>
+<<<<<<< HEAD
         Logout
       </button>
+=======
+          Logout
+        </button>
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
     </div>
   );
 }
