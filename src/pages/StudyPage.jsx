@@ -44,6 +44,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
 import { supabase } from "../lib/supabaseClient";
+import { STUDY_MEETINGS } from "../data/meetings";
 
 export default function StudyPage() {
   const [keyword, setKeyword] = useState("");
@@ -90,17 +91,22 @@ export default function StudyPage() {
     navigate(`/meetings/new?category=Study&from=${from}`);
   };
 
-  return (
+return (
     <div className="section">
       <div>
-        <SearchPlus
-          keyword={keyword}
-          setKeyword={setKeyword}
-          onPlus={handlePlus}
-        />
+        <SearchPlus keyword={keyword} setKeyword={setKeyword} onPlus={handlePlus} />
+        <h3 className="section__title">Study</h3>
+        {/*<div className="filter_buttons">
+          {["All","Creative","Outdoor","Social"].map(f => (
+            <button key={f}
+              className={`filter_text ${activeFilter === f ? "filter_text--active" : ""}`}
+              onClick={() => setActiveFilter(f)}>
+              {f}
+            </button>
+          ))}
+        </div>*/}
         <MeetingGrid meetings={filteredMeetings} columns={3} />
-
       </div>
     </div>
   );
-  }
+}
