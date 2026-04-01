@@ -21,8 +21,25 @@ const [formData, setFormData] = useState({
   bio: user.user_metadata?.bio || "",
 });
 
+// 요 부분 그냥 예시로 넣어둠. 지금 미팅 create 안됨//
+  // const tabData = [[], []]; 이부분은 원래 있었는데 주석 처리
+  const [createdMeetings, setCreatedMeetings] = useState([
+ {
+  id: "s1",
+  category: "Study",
+  title: "MA 265 Linear Algebra Study Group",
+  desc: "Review proofs, eigenvalues, and exam practice problems together.",
+  tags: ["Weekly Review", "Homework Help", "Exam Prep"],
+  mode: "In‑Person",
+  schedule: "Mon & Wed 7pm",
+  members: "5",
+}
+]);
+const [joinedMeetings, setJoinedMeetings] = useState([]);
+const tabData = [createdMeetings, joinedMeetings];
 
-  const tabData = [[], []];
+
+
 
   const handleLogout = async () => {
     try {
@@ -60,6 +77,11 @@ const [formData, setFormData] = useState({
   const handleSave = async() => {
     console.log("Saving profile with data:", formData);
     setIsEditing(false);
+  };
+  
+  // 요기 handleDelete 추가
+  const handleDelete = (id) => {
+    setCreatedMeetings((prev) => prev.filter((meeting) => meeting.id !== id));
   };
 
   return (
@@ -168,23 +190,31 @@ const [formData, setFormData] = useState({
       </div>
   
       <div className="profile__content">
-        {tabData[activeTab].length === 0 ? (
-          <p className="profile__empty">No meetings found.</p>
-        ) : (
-          tabData[activeTab].map((item) => (
-            <div
-              key={item.id}
-              className="profile__item"
-              onClick={() => navigate(`/meetings/${item.id}`)}>
-              <div>
-                <p className="profile__item-title">{item.title}</p>
-                <p className="profile__item-category">{item.category}</p>
-              </div>
-              <p className="profile__item-date">{item.date}</p>
-            </div>
-          ))
+  {tabData[activeTab].length === 0 ? (
+    <p className="profile__empty">No meetings found.</p>
+  ) : (
+    tabData[activeTab].map((item) => (
+      <div key={item.id}> 
+        <div
+          className="profile__item"
+          onClick={() => navigate(`/meetings/${item.id}`)}>
+          <div>
+            <p className="profile__item-title">{item.title}</p>
+            <p className="profile__item-category">{item.category}</p>
+          </div>
+          <p className="profile__item-date">{item.date}</p>
+        </div>
+        {activeTab === 0 && (
+          <button
+            className="profile__delete-btn"
+            onClick={() => handleDelete(item.id)}>
+            Delete
+          </button>
         )}
       </div>
+    ))
+  )}
+</div>
       <button className="profile__logout" onClick={handleLogout}>
           Logout
         </button>

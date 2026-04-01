@@ -110,6 +110,19 @@
   
 }
 
+.profile__delete-btn {
+  margin-top: 5px;
+  padding: 6px 10px;
+  background: #008080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+
+
 .profile__info-fields {
   display: flex;
   flex-direction: column;
