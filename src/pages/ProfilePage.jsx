@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { supabase } from "../lib/supabaseClient";
 import "../styles/detail.css";
 
 const TABS = ["Created", "Joined"];
@@ -9,6 +10,17 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const { user, signOut, loading } = useAuth();
   const [activeTab, setActiveTab] = useState(0);
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: user.user_metadata?.name || "",
+    gender: user.user_metadata?.gender || "",
+    school: user.user_metadata?.school || "",
+    major: user.user_metadata?.major || "",
+    phone: user.user_metadata?.phone || "",
+    bio: user.user_metadata?.bio || "",
+});
 
   const tabData = [[], []];
 
@@ -45,6 +57,27 @@ export default function ProfilePage() {
   }
   const nickname = user.user_metadata?.username;
 
+    const handleSave = async () => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        data: {
+          name: formData.name,
+          gender: formData.gender,
+          school: formData.school,
+          major: formData.major,
+          phone: formData.phone,
+          bio: formData.bio
+        }
+      });
+      if (error) throw error;
+      setIsEditing(false);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to update profile.");
+    }
+  };
+
+
   return (
     <div className="section profile">
   
@@ -55,33 +88,87 @@ export default function ProfilePage() {
         <div className="profile__info">
         <div className="profile__info-header">
           <h2 className="profile__info-title">Basic Info</h2>
-          <button className="profile__info-edit">Edit</button>
+          <button className="profile__info-edit"
+          onClick={() => setIsEditing(true)}>
+            Edit
+          </button>
+               <button className="profile__info-save" onClick={handleSave}>Save</button>
         </div>
+
 
         <div className="profile__info-fields">
           <div>
             <p className="profile__info-label">Name</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.name}
+                onChange = {(e) => setFormData({...formData, name: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.name}</p>
+            )}
+
           </div>
           <div>
             <p className="profile__info-label">Gender</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.gender}
+                onChange = {(e) => setFormData({...formData, gender: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.gender}</p>
+            )}
           </div>
           <div>
             <p className="profile__info-label">School</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.school}
+                onChange = {(e) => setFormData({...formData, school: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.school}</p>
+            )}
           </div>
           <div>
             <p className="profile__info-label">Major</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.major}
+                onChange = {(e) => setFormData({...formData, major: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.major}</p>
+            )}
           </div>
           <div>
             <p className="profile__info-label">Phone</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.phone}
+                onChange = {(e) => setFormData({...formData, phone: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.phone}</p>
+            )}
           </div>
           <div>
             <p className="profile__info-label">Bio</p>
-            <p className="profile__info-value"></p>
+              {isEditing?(
+              <input
+                className="prifile__info-input"
+                value = {formData.bio}
+                onChange = {(e) => setFormData({...formData, bio: e.target.value})}
+              />
+            ) : (
+               <p className="profile__info-value">{formData.bio}</p>
+            )}
           </div>
         </div>
       </div>
