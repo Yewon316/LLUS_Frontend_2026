@@ -4,7 +4,6 @@ import SearchPlus from "../components/SearchPlus";
 import MeetingGrid from "../components/MeetingGrid";
 import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
-import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function StudyPage() {
   const [keyword, setKeyword] = useState("");
@@ -12,8 +11,6 @@ export default function StudyPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const revealRef = useScrollReveal();
-
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase
@@ -68,7 +65,7 @@ return (
             {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
           </div>
         ) : (
-          <div className="reveal" ref={revealRef}>
+          <div>
             <MeetingGrid meetings={filteredMeetings} columns={3} />
           </div>
         )}

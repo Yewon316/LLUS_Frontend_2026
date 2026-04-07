@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../context/AuthContext";
 import "../styles/home.css";
 
 const BADGE_CLASS = {
@@ -47,8 +48,12 @@ function EmptyState({ id, onBack }) {
 export default function MeetingDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [meeting, setMeeting] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [joined, setJoined] = useState(false);
+  const [memberCount, setMemberCount] = useState(0);
+  const [joining, setJoining] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -63,23 +68,74 @@ export default function MeetingDetailPage() {
     }
 
     (async () => {
-      const { data, error } = await supabase
-        .from("meetings")
-        .select("*")
-        .eq("id", id)
-        .single();
+      const [meetingRes, countRes] = await Promise.all([
+        supabase.from("meetings").select("*").eq("id", id).single(),
+        supabase
+          .from("meeting_members")
+          .select("*", { count: "exact", head: true })
+          .eq("meeting_id", id),
+      ]);
 
-      if (error) {
-        console.error(error);
+      if (meetingRes.error) {
+        console.error(meetingRes.error);
         setLoading(false);
         return;
       }
-      setMeeting(data);
+
+      setMeeting(meetingRes.data);
+      setMemberCount(countRes.count || 0);
+
+      if (user) {
+        const { data: membership } = await supabase
+          .from("meeting_members")
+          .select("id")
+          .eq("meeting_id", id)
+          .eq("user_id", user.id)
+          .maybeSingle();
+        setJoined(!!membership);
+      }
+
       setLoading(false);
     })();
-  }, [id]);
+  }, [id, user]);
+
+  const handleJoin = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    setJoining(true);
+    if (joined) {
+      await supabase
+        .from("meeting_members")
+        .delete()
+        .eq("meeting_id", id)
+        .eq("user_id", user.id);
+      setJoined(false);
+      setMemberCount((prev) => prev - 1);
+    } else {
+      const { error } = await supabase
+        .from("meeting_members")
+        .insert({ meeting_id: id, user_id: user.id });
+      if (!error) {
+        setJoined(true);
+        setMemberCount((prev) => prev + 1);
+      }
+    }
+    setJoining(false);
+  };
 
   const goBack = () => navigate(-1);
+
+  const joinLabel = !user
+    ? "Login to Join"
+    : joining
+      ? joined
+        ? "Leaving..."
+        : "Joining..."
+      : joined
+        ? "Leave Meeting"
+        : "Join this Meeting";
 
   return (
     <section className="detail">
@@ -107,37 +163,30 @@ export default function MeetingDetailPage() {
             <div className="detail__body">
               {meeting.desc && <p className="detail__desc">{meeting.desc}</p>}
 
-              {(meeting.mode ||
-                meeting.schedule ||
-                meeting.members ||
-                meeting.category) && (
-                <div className="detail__info">
-                  {meeting.mode && (
-                    <div className="detail__infoItem">
-                      <span className="detail__label">Mode</span>
-                      <span className="detail__value">{meeting.mode}</span>
-                    </div>
-                  )}
-                  {meeting.schedule && (
-                    <div className="detail__infoItem">
-                      <span className="detail__label">Schedule</span>
-                      <span className="detail__value">{meeting.schedule}</span>
-                    </div>
-                  )}
-                  {meeting.members && (
-                    <div className="detail__infoItem">
-                      <span className="detail__label">Members</span>
-                      <span className="detail__value">{meeting.members}</span>
-                    </div>
-                  )}
-                  {meeting.category && (
-                    <div className="detail__infoItem">
-                      <span className="detail__label">Category</span>
-                      <span className="detail__value">{meeting.category}</span>
-                    </div>
-                  )}
+              <div className="detail__info">
+                {meeting.mode && (
+                  <div className="detail__infoItem">
+                    <span className="detail__label">Mode</span>
+                    <span className="detail__value">{meeting.mode}</span>
+                  </div>
+                )}
+                {meeting.schedule && (
+                  <div className="detail__infoItem">
+                    <span className="detail__label">Schedule</span>
+                    <span className="detail__value">{meeting.schedule}</span>
+                  </div>
+                )}
+                <div className="detail__infoItem">
+                  <span className="detail__label">Members</span>
+                  <span className="detail__value">{memberCount}</span>
                 </div>
-              )}
+                {meeting.category && (
+                  <div className="detail__infoItem">
+                    <span className="detail__label">Category</span>
+                    <span className="detail__value">{meeting.category}</span>
+                  </div>
+                )}
+              </div>
 
               {meeting.tags?.length > 0 && (
                 <div className="detail__tags">
@@ -152,9 +201,11 @@ export default function MeetingDetailPage() {
 
             <div className="detail__footer">
               <div className="detail__actions">
-                <button className="detail__joinBtn">Join this Meeting</button>
-                <button className="detail__backBtn" onClick={goBack}>
-                  Back
+                <button
+                  className={`detail__joinBtn ${joined ? "detail__joinBtn--leave" : ""}`}
+                  onClick={handleJoin}
+                  disabled={joining}>
+                  {joinLabel}
                 </button>
               </div>
             </div>
