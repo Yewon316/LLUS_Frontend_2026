@@ -56,6 +56,8 @@ export default function MeetingDetailPage() {
   const [joining, setJoining] = useState(false);
 
   useEffect(() => {
+    let alive = true;
+
     (async () => {
       const [meetingRes, countRes] = await Promise.all([
         supabase.from("meetings").select("*").eq("id", id).single(),
@@ -119,8 +121,12 @@ export default function MeetingDetailPage() {
   const joinLabel = !user
     ? "Login to Join"
     : joining
-      ? joined ? "Leaving..." : "Joining..."
-      : joined ? "Leave Meeting" : "Join this Meeting";
+      ? joined
+        ? "Leaving..."
+        : "Joining..."
+      : joined
+        ? "Leave Meeting"
+        : "Join this Meeting";
 
   return (
     <section className="detail">
@@ -137,7 +143,8 @@ export default function MeetingDetailPage() {
           <div className="detail__card">
             <div className="detail__header">
               {meeting.category && (
-                <span className={`badge ${BADGE_CLASS[meeting.category] || ""}`}>
+                <span
+                  className={`badge ${BADGE_CLASS[meeting.category] || ""}`}>
                   {meeting.category}
                 </span>
               )}
@@ -145,39 +152,46 @@ export default function MeetingDetailPage() {
             </div>
 
             <div className="detail__body">
-              {meeting.desc && (
-                <p className="detail__desc">{meeting.desc}</p>
-              )}
+              {meeting.desc && <p className="detail__desc">{meeting.desc}</p>}
 
-              <div className="detail__info">
-                {meeting.mode && (
-                  <div className="detail__infoItem">
-                    <span className="detail__label">Mode</span>
-                    <span className="detail__value">{meeting.mode}</span>
-                  </div>
-                )}
-                {meeting.schedule && (
-                  <div className="detail__infoItem">
-                    <span className="detail__label">Schedule</span>
-                    <span className="detail__value">{meeting.schedule}</span>
-                  </div>
-                )}
-                <div className="detail__infoItem">
-                  <span className="detail__label">Members</span>
-                  <span className="detail__value">{memberCount}</span>
+              {(meeting.mode ||
+                meeting.schedule ||
+                meeting.members ||
+                meeting.category) && (
+                <div className="detail__info">
+                  {meeting.mode && (
+                    <div className="detail__infoItem">
+                      <span className="detail__label">Mode</span>
+                      <span className="detail__value">{meeting.mode}</span>
+                    </div>
+                  )}
+                  {meeting.schedule && (
+                    <div className="detail__infoItem">
+                      <span className="detail__label">Schedule</span>
+                      <span className="detail__value">{meeting.schedule}</span>
+                    </div>
+                  )}
+                  {meeting.members && (
+                    <div className="detail__infoItem">
+                      <span className="detail__label">Members</span>
+                      <span className="detail__value">{meeting.members}</span>
+                    </div>
+                  )}
+                  {meeting.category && (
+                    <div className="detail__infoItem">
+                      <span className="detail__label">Category</span>
+                      <span className="detail__value">{meeting.category}</span>
+                    </div>
+                  )}
                 </div>
-                {meeting.category && (
-                  <div className="detail__infoItem">
-                    <span className="detail__label">Category</span>
-                    <span className="detail__value">{meeting.category}</span>
-                  </div>
-                )}
-              </div>
+              )}
 
               {meeting.tags?.length > 0 && (
                 <div className="detail__tags">
                   {meeting.tags.map((t) => (
-                    <span key={t} className="tag">#{t}</span>
+                    <span key={t} className="tag">
+                      #{t}
+                    </span>
                   ))}
                 </div>
               )}
@@ -185,12 +199,11 @@ export default function MeetingDetailPage() {
 
             <div className="detail__footer">
               <div className="detail__actions">
-                <button
-                  className={`detail__joinBtn ${joined ? "detail__joinBtn--leave" : ""}`}
-                  onClick={handleJoin}
-                  disabled={joining}
-                >
+                <button className="detail__joinBtn" onClick={handleJoin}>
                   {joinLabel}
+                </button>
+                <button className="detail__backBtn" onClick={goBack}>
+                  Back
                 </button>
               </div>
             </div>

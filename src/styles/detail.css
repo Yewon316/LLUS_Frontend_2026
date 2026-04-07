@@ -140,6 +140,41 @@
   color: #333;
 }
 
+<<<<<<< HEAD
+.profile__info-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.profile__actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.profile__btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile__btn--save {
+  background: #007bff;
+  color: white;
+}
+
+.profile__btn--cancel {
+  background: #6c757d;
+  color: white;
+}
+
+=======
+>>>>>>> ae6d6319b8d8ee3478b1cb6541d2bb107afc1965
 .profile__logout {
   margin-top: 12px;
   background: none;

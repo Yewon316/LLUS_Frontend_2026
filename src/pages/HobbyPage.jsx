@@ -6,6 +6,29 @@ import SkeletonCard from "../components/SkeletonCard";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/home.css";
 
+const CREATIVE_TAGS = [
+  "Photography",
+  "Music",
+  "Guitar",
+  "Art",
+  "Drawing",
+  "Movie",
+  "Discussion",
+  "Writing",
+  "Creative",
+];
+const OUTDOOR_TAGS = ["Outdoor", "Hiking"];
+const SOCIAL_TAGS = [
+  "Social",
+  "Board Game",
+  "Reading",
+  "Books",
+  "Baking",
+  "Cooking",
+  "Yoga",
+  "Health",
+];
+
 export default function HobbyPage() {
   const [keyword, setKeyword] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
