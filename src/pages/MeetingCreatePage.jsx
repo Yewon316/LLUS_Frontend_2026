@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../context/AuthContext";
 import "../styles/home.css";
 
 export default function MeetingCreatePage() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const category = params.get("category") ?? "Sports";
   const from = decodeURIComponent(params.get("from") ?? "/");
@@ -47,6 +49,7 @@ export default function MeetingCreatePage() {
         mode,
         schedule: schedule.trim(),
         members: members.trim(),
+        user_id: user.id,
       };
 
       const { error } = await supabase.from("meetings").insert(payload);

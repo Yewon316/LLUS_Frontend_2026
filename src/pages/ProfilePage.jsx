@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
@@ -14,15 +14,20 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: user.user_metadata?.name || "",
-    gender: user.user_metadata?.gender || "",
-    school: user.user_metadata?.school || "",
-    major: user.user_metadata?.major || "",
-    phone: user.user_metadata?.phone || "",
-    bio: user.user_metadata?.bio || "",
+    name: user?.user_metadata?.name || "",
+    gender: user?.user_metadata?.gender || "",
+    school: user?.user_metadata?.school || "",
+    major: user?.user_metadata?.major || "",
+    phone: user?.user_metadata?.phone || "",
+    bio: user?.user_metadata?.bio || "",
   });
 
-  const tabData = [[], []];
+  const [createdMeetings, setCreatedMeetings] = useState([]);
+  const [joinedMeetings, setJoinedMeetings] = useState([]);
+  const [loadingMeetings, setLoadingMeetings] = useState(false);
+  const [errorMeetings, setErrorMeetings] = useState("");
+
+  const tabData = [createdMeetings, joinedMeetings];
 
   const handleLogout = async () => {
     try {
@@ -37,6 +42,41 @@ export default function ProfilePage() {
   const handleEdit = () => {
     setIsEditing(true);
   };
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchMeetings = async () => {
+      setLoadingMeetings(true);
+      setErrorMeetings("");
+      try {
+        const [createdRes, joinedRes] = await Promise.all([
+          supabase
+            .from("meetings")
+            .select("*")
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false }),
+          supabase
+            .from("meeting_members")
+            .select("meetings(*)")
+            .eq("user_id", user.id),
+        ]);
+
+        if (createdRes.error) throw createdRes.error;
+        if (joinedRes.error) throw joinedRes.error;
+
+        setCreatedMeetings(createdRes.data || []);
+        setJoinedMeetings(joinedRes.data?.map((item) => item.meetings) || []);
+      } catch (error) {
+        console.error(error);
+        setErrorMeetings("Failed to load meetings.");
+      } finally {
+        setLoadingMeetings(false);
+      }
+    };
+
+    fetchMeetings();
+  }, [user]);
 
   const handleSave = async () => {
     try {
@@ -233,7 +273,11 @@ export default function ProfilePage() {
         ))}
       </div>
       <div className="profile__content">
-        {tabData[activeTab].length === 0 ? (
+        {loadingMeetings ? (
+          <p>Loading meetings...</p>
+        ) : errorMeetings ? (
+          <p className="profile__error">{errorMeetings}</p>
+        ) : tabData[activeTab].length === 0 ? (
           <p className="profile__empty">No meetings found.</p>
         ) : (
           tabData[activeTab].map((item) => (
@@ -245,7 +289,9 @@ export default function ProfilePage() {
                 <p className="profile__item-title">{item.title}</p>
                 <p className="profile__item-category">{item.category}</p>
               </div>
-              <p className="profile__item-date">{item.date}</p>
+              <p className="profile__item-date">
+                {item.schedule || "No schedule"}
+              </p>
             </div>
           ))
         )}
