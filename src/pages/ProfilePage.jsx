@@ -109,9 +109,30 @@ export default function ProfilePage() {
     }
   };
 
+  const handleDeleteMeeting = async (meetingId) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this meeting?");
+  if (!confirmDelete) return;
+
+  const { error } = await supabase
+    .from("meetings")
+    .delete()
+    .eq("id", meetingId)
+    .eq("user_id", user.id); 
+  if (error) {
+    console.error(error);
+    alert("Failed to delete meeting.");
+    return;
+  }
+
+
+  setCreatedMeetings((prev) => prev.filter((m) => m.id !== meetingId));
+};
+
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
+
+  
 
   if (loading) {
     return <div className="section">Loading profile...</div>;
@@ -280,20 +301,43 @@ export default function ProfilePage() {
         ) : tabData[activeTab].length === 0 ? (
           <p className="profile__empty">No meetings found.</p>
         ) : (
-          tabData[activeTab].map((item) => (
-            <div
-              key={item.id}
-              className="profile__item"
-              onClick={() => navigate(`/meetings/${item.id}`)}>
-              <div>
-                <p className="profile__item-title">{item.title}</p>
-                <p className="profile__item-category">{item.category}</p>
-              </div>
-              <p className="profile__item-date">
-                {item.schedule || "No schedule"}
-              </p>
-            </div>
-          ))
+
+          
+  tabData[activeTab].map((item) => (
+  <div key={item.id} className="profile__item">
+    <div
+      className="profile__item-main"
+      onClick={() => navigate(`/meetings/${item.id}`)}
+    >
+      <div>
+        <p className="profile__item-title">{item.title}</p>
+        <p className="profile__item-category">{item.category}</p>
+      </div>
+      <p className="profile__item-date">
+        {item.schedule || "No schedule"}
+      </p>
+    </div>
+
+   
+    {activeTab === 0 && item.user_id === user.id && (
+      <div className="profile__item-actions">
+        <button
+          className="profile__item-btn profile__item-btn--edit"
+          onClick={() => navigate(`/meetings/${item.id}?edit=true`)}
+        >
+          Edit
+        </button>
+
+        <button
+          className="profile__item-btn profile__item-btn--delete"
+          onClick={() => handleDeleteMeeting(item.id)}
+        >
+          Delete
+        </button>
+      </div>
+    )}
+  </div>
+))
         )}
       </div>
       <button className="profile__logout" onClick={handleLogout}>

@@ -245,3 +245,25 @@
   font-size: 13px;
   color: #aaa;
 }
+.profile__item-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.profile__item-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile__item-btn--edit {
+  background: #4a90e2;
+  color: white;
+}
+
+.profile__item-btn--delete {
+  background: #e24a4a;
+  color: white;
+}
