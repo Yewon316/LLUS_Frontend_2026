@@ -54,6 +54,8 @@ export default function MeetingDetailPage() {
   const [joined, setJoined] = useState(false);
   const [memberCount, setMemberCount] = useState(0);
   const [joining, setJoining] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
 
   useEffect(() => {
     let alive = true;
@@ -116,7 +118,92 @@ export default function MeetingDetailPage() {
     setJoining(false);
   };
 
+  const handleDelete = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    if (!meeting) {
+      setDeleteError("Meeting is still loading. Please wait and try again.");
+      return;
+    }
+
+    const meetingOwnerId = meeting.owner_id || meeting.user_id;
+    if (meetingOwnerId !== user.id) {
+      setDeleteError(
+        `Unable to delete meeting. This meeting belongs to a different user. Owner: ${meetingOwnerId}`,
+      );
+      return;
+    }
+
+    setDeleteError("");
+    setDeleting(true);
+
+    // If this meeting was created before owner_id was populated, update it now.
+    if (!meeting.owner_id && meeting.user_id === user.id) {
+      const { error: ownerUpdateError } = await supabase
+        .from("meetings")
+        .update({ owner_id: user.id })
+        .eq("id", meeting.id)
+        .eq("user_id", user.id);
+
+      if (ownerUpdateError) {
+        console.error("owner_id update error", ownerUpdateError);
+        setDeleteError(
+          `Unable to prepare meeting for deletion: ${ownerUpdateError.message}`,
+        );
+        setDeleting(false);
+        return;
+      }
+    }
+
+    const { error: memberError } = await supabase
+      .from("meeting_members")
+      .delete()
+      .eq("meeting_id", id);
+
+    if (memberError) {
+      console.error("meeting_members delete error", memberError);
+      setDeleteError(
+        `Unable to delete meeting members first: ${memberError.message}`,
+      );
+      setDeleting(false);
+      return;
+    }
+
+    const deleteFilter = meeting.owner_id
+      ? { id: meeting.id, owner_id: user.id }
+      : { id: meeting.id, user_id: user.id };
+
+    const { data: deletedMeeting, error } = await supabase
+      .from("meetings")
+      .delete()
+      .select()
+      .match(deleteFilter);
+
+    if (error) {
+      console.error("meeting delete error", error);
+      setDeleteError(`Unable to delete meeting: ${error.message}`);
+      setDeleting(false);
+      return;
+    }
+
+    if (!deletedMeeting || deletedMeeting.length === 0) {
+      setDeleteError(
+        "Unable to delete meeting. The record may already be removed or you may not have permission.",
+      );
+      setDeleting(false);
+      return;
+    }
+
+    navigate("/");
+  };
+
   const goBack = () => navigate(-1);
+
+  const isOwner =
+    user && (meeting?.owner_id === user.id || meeting?.user_id === user.id);
 
   const joinLabel = !user
     ? "Login to Join"
@@ -198,6 +285,9 @@ export default function MeetingDetailPage() {
             </div>
 
             <div className="detail__footer">
+              {deleteError ? (
+                <div className="detail__error">{deleteError}</div>
+              ) : null}
               <div className="detail__actions">
                 <button className="detail__joinBtn" onClick={handleJoin}>
                   {joinLabel}
@@ -205,6 +295,14 @@ export default function MeetingDetailPage() {
                 <button className="detail__backBtn" onClick={goBack}>
                   Back
                 </button>
+                {isOwner ? (
+                  <button
+                    className="deleteBtn"
+                    onClick={handleDelete}
+                    disabled={deleting}>
+                    {deleting ? "Deleting..." : "Delete Meeting"}
+                  </button>
+                ) : null}
               </div>
             </div>
           </div>

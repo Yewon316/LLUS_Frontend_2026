@@ -49,6 +49,7 @@ export default function MeetingCreatePage() {
         mode,
         schedule: schedule.trim(),
         members: members.trim(),
+        owner_id: user.id,
         user_id: user.id,
       };
 
