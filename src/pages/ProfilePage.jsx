@@ -4,14 +4,18 @@ import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/detail.css";
 
+
 const TABS = ["Created", "Joined"];
+
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { user, signOut, loading } = useAuth();
   const [activeTab, setActiveTab] = useState(0);
 
+
   const [isEditing, setIsEditing] = useState(false);
+
 
   const [formData, setFormData] = useState({
     name: user?.user_metadata?.name || "",
@@ -22,12 +26,15 @@ export default function ProfilePage() {
     bio: user?.user_metadata?.bio || "",
   });
 
+
   const [createdMeetings, setCreatedMeetings] = useState([]);
   const [joinedMeetings, setJoinedMeetings] = useState([]);
   const [loadingMeetings, setLoadingMeetings] = useState(false);
   const [errorMeetings, setErrorMeetings] = useState("");
 
+
   const tabData = [createdMeetings, joinedMeetings];
+
 
   const handleLogout = async () => {
     try {
@@ -39,12 +46,15 @@ export default function ProfilePage() {
     }
   };
 
+
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+
   useEffect(() => {
     if (!user) return;
+
 
     const fetchMeetings = async () => {
       setLoadingMeetings(true);
@@ -62,8 +72,10 @@ export default function ProfilePage() {
             .eq("user_id", user.id),
         ]);
 
+
         if (createdRes.error) throw createdRes.error;
         if (joinedRes.error) throw joinedRes.error;
+
 
         setCreatedMeetings(createdRes.data || []);
         setJoinedMeetings(joinedRes.data?.map((item) => item.meetings) || []);
@@ -75,8 +87,10 @@ export default function ProfilePage() {
       }
     };
 
+
     fetchMeetings();
   }, [user]);
+
 
   const handleSave = async () => {
     try {
@@ -94,6 +108,7 @@ export default function ProfilePage() {
     }
   };
 
+
   const handleCancel = () => {
     setIsEditing(false);
     // Reset formData to original
@@ -109,34 +124,42 @@ export default function ProfilePage() {
     }
   };
 
+
   const handleDeleteMeeting = async (meetingId) => {
   const confirmDelete = window.confirm("Are you sure you want to delete this meeting?");
   if (!confirmDelete) return;
 
-  const { error } = await supabase
-    .from("meetings")
-    .delete()
-    .eq("id", meetingId)
-    .eq("user_id", user.id); 
-  if (error) {
-    console.error(error);
-    alert("Failed to delete meeting.");
-    return;
-  }
+    const { error } = await supabase
+      .from("meetings")
+      .delete()
+      .eq("id", meetingId)
+      .eq("user_id", user.id);
+      
+    if (error) {
+      console.error(error);
+      alert("Failed to delete meeting.");
+      return;
+    }
+
+
 
 
   setCreatedMeetings((prev) => prev.filter((m) => m.id !== meetingId));
 };
 
+
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  
+
+ 
+
 
   if (loading) {
     return <div className="section">Loading profile...</div>;
   }
+
 
   if (!user) {
     return (
@@ -157,11 +180,13 @@ export default function ProfilePage() {
   }
   const nickname = user.user_metadata?.username;
 
+
   return (
     <div className="section profile">
       <div style={{ marginBottom: "32px" }}>
         <h1 className="profile__nickname">{nickname}</h1>
         <p className="profile__email">{user.email}</p>
+
 
         <div className="profile__info">
           <div className="profile__info-header">
@@ -302,7 +327,8 @@ export default function ProfilePage() {
           <p className="profile__empty">No meetings found.</p>
         ) : (
 
-          
+
+         
   tabData[activeTab].map((item) => (
   <div key={item.id} className="profile__item">
     <div
@@ -318,6 +344,7 @@ export default function ProfilePage() {
       </p>
     </div>
 
+
    
     {activeTab === 0 && item.user_id === user.id && (
       <div className="profile__item-actions">
@@ -327,6 +354,7 @@ export default function ProfilePage() {
         >
           Edit
         </button>
+
 
         <button
           className="profile__item-btn profile__item-btn--delete"
@@ -346,3 +374,6 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+
+
