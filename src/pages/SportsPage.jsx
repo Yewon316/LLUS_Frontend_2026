@@ -55,6 +55,7 @@ export default function SportsPage() {
           setKeyword={setKeyword}
           onPlus={handlePlus}
         />
+        <h3 className="section__title">Sport</h3>
         {loading ? (
           <div className="meetingGrid" style={{ "--cols": 3 }}>
             {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
