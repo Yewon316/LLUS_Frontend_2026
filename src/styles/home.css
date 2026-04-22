@@ -878,3 +878,119 @@ a { color: inherit; text-decoration: none; }
   text-decoration: underline;
 }
 }
+
+.meetingCreate__required {
+  color: #6c63ff;
+  margin-left: 2px;
+}
+
+.meetingCreate__chipBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: #fff;
+  min-height: 44px;
+  cursor: text;
+}
+
+.meetingCreate__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  background: #eeecff;
+  color: #6c63ff;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.meetingCreate__chipRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c63ff;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.meetingCreate__chipInput {
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  flex: 1;
+  min-width: 140px;
+  background: transparent;
+}
+
+.meetingCreate__membersRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meetingCreate__noLimit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.meetingCreate__days {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.meetingCreate__dayBtn {
+  padding: 5px 12px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.15s;
+}
+
+.meetingCreate__dayBtn--active {
+  background: #6c63ff;
+  border-color: #6c63ff;
+  color: #fff;
+}
+
+.meetingCreate__timeSlots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.meetingCreate__timeBtn {
+  padding: 5px 16px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.15s;
+}
+
+.meetingCreate__timeBtn--active {
+  background: #6c63ff;
+  border-color: #6c63ff;
+  color: #fff;
+}
